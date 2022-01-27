@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'dart:convert';
 import 'package:wolrd_time/services/world_time.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class Loading extends StatefulWidget {
   const Loading({Key? key}) : super(key: key);
@@ -32,12 +33,10 @@ class _LoadingState extends State<Loading> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: Center(
-            child: Text(
-      'loading',
-      style: TextStyle(
+      child: SpinKitFadingCircle(
         color: Colors.blueAccent,
-        fontSize: 30,
+        size: 50.0,
       ),
-    )));
+    ));
   }
 }
