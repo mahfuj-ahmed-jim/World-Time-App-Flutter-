@@ -36,7 +36,7 @@ class _LoadingState extends State<Loading> {
       time,
       style: TextStyle(
         color: Colors.blueAccent,
-        fontSize: 30,
+        fontSize: 15,
       ),
     )));
   }
