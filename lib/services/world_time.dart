@@ -5,12 +5,10 @@ import 'package:intl/intl.dart';
 class WorldTime {
   late String location; // location for the ui
   late String time; // time for that location
-  late String flag; // url for assest icon
   late String urlEndPoint; // location url for api end point
   late bool isDayTime; // day time or not
 
-  WorldTime(
-      {required this.location, required this.flag, required this.urlEndPoint});
+  WorldTime({required this.location, required this.urlEndPoint});
 
   Future<void> getTime() async {
     // get the response

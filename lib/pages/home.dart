@@ -11,19 +11,22 @@ class _HomeState extends State<Home> {
   Map data = {};
   @override
   Widget build(BuildContext context) {
-    data = ModalRoute.of(context)!.settings.arguments as Map;
+    // get data from previous page
+    data = data.isNotEmpty
+        ? data
+        : ModalRoute.of(context)!.settings.arguments as Map;
     print(data);
     // set background image
-    String backgroundImage = data['isDayTime'] ? 'day.png' : 'night.png';
-    Color backgroundColor = data['isDayTime'] ? Colors.blue : Colors.indigo;
+    //String backgroundImage = data['isDayTime'] ? 'day.png' : 'night.png';
+    //Color backgroundColor = data['isDayTime'] ? Colors.blue : Colors.indigo;
     return Scaffold(
-      backgroundColor: backgroundColor,
+      //backgroundColor: backgroundColor,
       body: SafeArea(
           child: Container(
-        decoration: BoxDecoration(
+        /*decoration: BoxDecoration(
             image: DecorationImage(
                 image: AssetImage('assets/$backgroundImage'),
-                fit: BoxFit.cover)),
+                fit: BoxFit.cover)),*/
         child: Padding(
           padding: const EdgeInsets.all(12),
           child: Center(
@@ -31,8 +34,16 @@ class _HomeState extends State<Home> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 FlatButton.icon(
-                  onPressed: () {
-                    Navigator.pushNamed(context, '/location');
+                  onPressed: () async {
+                    dynamic result =
+                        await Navigator.pushNamed(context, '/location');
+                    setState(() {
+                      data = {
+                        'time': result['time'],
+                        'location': result['location'],
+                        'isDayTime': result['isDayTime'],
+                      };
+                    });
                   },
                   icon: Icon(
                     Icons.edit_location,
